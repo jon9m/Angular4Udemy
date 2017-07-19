@@ -12,12 +12,12 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from "./shared/dropdown.directive";
 import { ShoppingListService } from "app/shopping-list/shopping-list.service";
+import { AppRoutingModule } from "app/app-routing.module";
+import { AuthService } from "app/auth.service";
+import { AuthGuard } from "app/auth-guard.service";
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
-import { Routes, RouterModule } from '@angular/router';
-const appRoutes: Routes = [
-  {path:'recipes',component:RecipesComponent},
-  {path:'shoppinglist',component:ShoppingListComponent}
-];
 
 @NgModule({
   declarations: [
@@ -29,13 +29,15 @@ const appRoutes: Routes = [
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    AppRoutingModule
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,12 +14,9 @@ export class AppComponent {
     this.loadedFeature = feature;
   }
 
-  constructor(private router: Router, private route:ActivatedRoute) { }
-  ngAfterViewInit() { //A Lifecycle method
-    this.router.navigate(['/recipes']);  //load recipe module after app loading
-    // this.router.navigate(['recipes'], { relativeTo: this.route });
-  }
-
-  
-
+  constructor(private router: Router, private route: ActivatedRoute) { }
+  // ngAfterViewInit() { //A Lifecycle method
+  //   this.router.navigate(['/recipes']);  //load recipe module after app loading
+  //   // this.router.navigate(['recipes'], { relativeTo: this.route });
+  // }
 }

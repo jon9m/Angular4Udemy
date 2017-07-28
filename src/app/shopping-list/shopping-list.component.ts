@@ -30,4 +30,8 @@ export class ShoppingListComponent implements OnInit,OnDestroy {
     this.shopplingListSubscription.unsubscribe();  //For shopping list 'Subject' since its custom Observable !!!
                                                    // No need for EventEmitter 
   }
+
+  onEditItem(index:number){
+      this.shoppingListService.startedEditing.next(index);
+  }
 }

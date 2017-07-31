@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html'
 })
-export class RecipeListComponent implements OnInit, OnDestroy {
+export class RecipeListComponent implements OnInit {
 
   private recipes: Recipe[];
   constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
@@ -21,11 +21,11 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.recipes = this.recipeService.getRecipes();
   }
 
-  ngOnDestroy(): void {
-    this.recipeService.recipesChanged.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.recipeService.recipesChanged.unsubscribe();
+  // }
 
   onNewRecipe() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
-}  
+}

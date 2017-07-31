@@ -4,6 +4,12 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 import { Observer } from "rxjs/Observer";
 import { Subscription } from "rxjs/Subscription";
+import { DataStorageService } from "app/shared/data-storage.service";
+
+import { Response } from '@angular/http';
+import { Recipe } from "app/recipes/recipe.model";
+import { RecipeService } from "app/recipes/recipes.service";
+import { FireBaseAuthService } from "app/auth/firebase.auth.service";
 
 @Component({
     selector: 'app-header',
@@ -12,10 +18,12 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    myNumbersSubscription:Subscription;
-    myCustomSubscription:Subscription;
+    myNumbersSubscription: Subscription;
+    myCustomSubscription: Subscription;
 
     count: Number;
+
+    constructor(private dataStorageService: DataStorageService, private recipeService: RecipeService, private authService: FireBaseAuthService) { }
 
     @Output() featureSelectd = new EventEmitter<string>();
     OnSelect(feature: string) {
@@ -24,11 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         const myNumbers = Observable.interval(1000)            //ms
-        .map(
-            (data:number) => {
+            .map(
+            (data: number) => {
                 return data * 2;
             }
-        );		  
+            );
         this.myNumbersSubscription = myNumbers.subscribe(
             (number: number) => {
                 this.count = number;
@@ -59,7 +67,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-       this.myNumbersSubscription.unsubscribe();
-       this.myCustomSubscription.unsubscribe();
+        this.myNumbersSubscription.unsubscribe();
+        this.myCustomSubscription.unsubscribe();
+    }
+
+    onSaveData() {
+        this.dataStorageService.storeRecipes().subscribe(
+            (response) => console.log(response),
+            (error) => console.log(error)
+        );
+    }
+
+    onFetchData() {
+        this.dataStorageService.getRecipes().subscribe(
+            (response: Response) => {
+                const recipes: Recipe[] = response.json();
+                this.recipeService.setRecipes(recipes);
+            },
+            (error) => console.log(error)
+        );
+    }
+
+    onLogout(){
+        this.authService.logout();
     }
 }

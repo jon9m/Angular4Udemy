@@ -1,4 +1,4 @@
-export class AuthService {
+export class AuthService__ {
     loggedIn: boolean = true;
 
     login() {

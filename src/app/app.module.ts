@@ -25,6 +25,7 @@ import { DataStorageService } from "app/shared/data-storage.service";
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { FireBaseAuthService } from "app/auth/firebase.auth.service";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FireBaseAuthService } from "app/auth/firebase.auth.service";
     RecipeStartComponent,
     RecipeEditComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

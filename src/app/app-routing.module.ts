@@ -8,9 +8,12 @@ import { RecipeDetailComponent } from "app/recipes/recipe-detail/recipe-detail.c
 import { RecipeEditComponent } from "app/recipes/recipe-edit/recipe-edit.component";
 import { SignupComponent } from "app/auth/signup/signup.component";
 import { SigninComponent } from "app/auth/signin/signin.component";
+import { HomeComponent } from "app/home/home.component";
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+
+    // { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+    { path: '', component:HomeComponent },
     {
         path: 'recipes', component: RecipesComponent, children: [
             { path: '', component: RecipeStartComponent },

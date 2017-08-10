@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     count: Number;
 
-    constructor(private dataStorageService: DataStorageService, private recipeService: RecipeService, private authService: FireBaseAuthService) { }
+    constructor(private dataStorageService: DataStorageService, private recipeService: RecipeService, public authService: FireBaseAuthService) { }
 
     @Output() featureSelectd = new EventEmitter<string>();
     OnSelect(feature: string) {

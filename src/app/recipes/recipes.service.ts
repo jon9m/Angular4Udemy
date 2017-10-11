@@ -47,6 +47,11 @@ export class RecipeService {
         )
     ];
 
+    resetRecipes() {
+        this.recipes.splice(0, this.recipes.length, ...this.recipes.slice(0, 3))
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
     getRecipes() {
         return this.recipes.slice(); //Get only a copy of the array
     }
@@ -69,12 +74,12 @@ export class RecipeService {
         this.recipesChanged.next(this.recipes.slice());
     }
 
-    deleteRecipe(index:number){
+    deleteRecipe(index: number) {
         this.recipes.splice(index, 1);
         this.recipesChanged.next(this.recipes.slice());
     }
 
-    setRecipes(recipes:Recipe[]){
+    setRecipes(recipes: Recipe[]) {
         this.recipes = recipes;
         this.recipesChanged.next(this.recipes.slice());
     }

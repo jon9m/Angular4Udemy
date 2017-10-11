@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class FireBaseAuthService {
     token: string;
-    constructor(private router:Router) { }
+    constructor(private router: Router) { }
 
     signupUser(email: string, password: string) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -16,9 +16,9 @@ export class FireBaseAuthService {
 
     signinUser(email: string, password: string) {
         firebase.auth().signInWithEmailAndPassword(email, password)
-           .then(
+            .then(
             (response) => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/recipes']);
                 firebase.auth().currentUser.getToken().then(
                     (tk: string) => { this.token = tk }
                 )
@@ -31,7 +31,7 @@ export class FireBaseAuthService {
 
     getToken() {
         firebase.auth().currentUser.getToken().then(
-            (tk: string) => { 
+            (tk: string) => {
                 this.token = tk;
             }
         );      //Async action - firebase take token from local storage and chaneck it with server
@@ -39,12 +39,14 @@ export class FireBaseAuthService {
         return this.token;
     }
 
-    isAuthenticated(){       
+    isAuthenticated() {
         return this.token != null;
     }
 
-    logout(){
-        firebase.auth().signOut();
+    logout() {
+        firebase.auth().signOut().then((response) => {
+            this.router.navigate(['/']);
+        });
         this.token = null;
     }
 }

@@ -89,6 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     onLogout(){
+        this.recipeService.resetRecipes();
         this.authService.logout();
     }
 }

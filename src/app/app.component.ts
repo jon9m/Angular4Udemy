@@ -9,6 +9,9 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
+  title:string = "recipebook";
+
   ngOnInit(): void {
     firebase.initializeApp({
       apiKey: "AIzaSyBpJpYU4BAt9lhRIyGCImFGwhhAj-U3mYg",

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         const myNumbers = Observable.interval(1000)            //ms
             .map(
             (data: number) => {
-                return data * 2;
+                return data * 1;
             }
             );
         this.myNumbersSubscription = myNumbers.subscribe(

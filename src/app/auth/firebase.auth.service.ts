@@ -37,7 +37,7 @@ export class FireBaseAuthService {
             (tk: string) => {
                 this.token = tk;
             }
-        );      //Async action - firebase take token from local storage and chaneck it with server
+        );      //Async action - firebase take token from local storage and check it with server
         //and tries to give a new one if invalid
         return this.token;
     }

@@ -26,6 +26,8 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { FireBaseAuthService } from "app/auth/firebase.auth.service";
 import { HomeComponent } from './home/home.component';
+import { CanDeactivateGuard } from "app/canDeactivate-guard.service";
+import { ErorPageComponent } from './eror-page/eror-page.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { HomeComponent } from './home/home.component';
     RecipeEditComponent,
     SignupComponent,
     SigninComponent,
-    HomeComponent
+    HomeComponent,
+    ErorPageComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,7 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [ShoppingListService, AuthGuard, RecipeService, DataStorageService, FireBaseAuthService],
+  providers: [ShoppingListService, AuthGuard, CanDeactivateGuard, RecipeService, DataStorageService, FireBaseAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

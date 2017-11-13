@@ -3,16 +3,22 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
 import { RecipeService } from "app/recipes/recipes.service";
 import { Recipe } from "app/recipes/recipe.model";
+import { CanMyComponentDeactivate } from "app/canDeactivate-guard.service";
+import { Observable } from "rxjs/Rx";
 
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
-export class RecipeEditComponent implements OnInit {
+export class RecipeEditComponent implements OnInit, CanMyComponentDeactivate {
   id: number;
   editMode = false;
   recipeForm: FormGroup;
+
+  recipeName: string;
+  imagePath: string;
+  description: string;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private router: Router) { }
   ngOnInit() {
@@ -35,6 +41,9 @@ export class RecipeEditComponent implements OnInit {
     if (this.editMode) {
       const recipe = this.recipeService.getRecipe(this.id);
       recipeName = recipe.name;
+
+      this.recipeName = recipe.name;
+
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
 
@@ -56,7 +65,7 @@ export class RecipeEditComponent implements OnInit {
     });
   }
 
-  getControls(recipeForm){
+  getControls(recipeForm) {
     return recipeForm.get('ingredients').controls;
   }
 
@@ -85,10 +94,23 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
+    this.editMode = false;
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   onDeleteIngredient(i) {
     (<FormArray>this.recipeForm.get('ingredients')).removeAt(i);
+  }
+
+  canMyComponenetDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (!this.editMode) {
+      return true;
+    } else {
+      if ((this.recipeName !== this.recipeForm.value.name) ||
+        (this.imagePath !== this.recipeForm.value.imagePath) ||
+        (this.description !== this.recipeForm.value.description)) {
+        return confirm('You have unsaved data, do you want to continue?');
+      }
+    }
   }
 }

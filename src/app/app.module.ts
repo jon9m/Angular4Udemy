@@ -28,6 +28,7 @@ import { FireBaseAuthService } from "app/auth/firebase.auth.service";
 import { HomeComponent } from './home/home.component';
 import { CanDeactivateGuard } from "app/canDeactivate-guard.service";
 import { ErorPageComponent } from './eror-page/eror-page.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ErorPageComponent } from './eror-page/eror-page.component';
     SignupComponent,
     SigninComponent,
     HomeComponent,
-    ErorPageComponent
+    ErorPageComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

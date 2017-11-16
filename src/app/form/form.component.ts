@@ -11,7 +11,14 @@ export class FormComponent implements OnInit {
   @ViewChild('f') myform: NgForm;
   @ViewChild('ff') fname: NgForm;
 
-  defaultName:string;  
+  user = {
+    userName: '',
+    password: '',
+    email: '',
+    name: ''
+  }
+
+  defaultName: string;
 
   constructor() { }
 
@@ -24,8 +31,38 @@ export class FormComponent implements OnInit {
   //   console.log(form);
   // }
 
+  fillForm() {
+    this.myform.setValue({
+      userData: {
+        userName: "manoj",
+        password: "mypassword"
+      },
+      name: 'some name',
+      email: "sam@sam.com"
+    });
+
+    // this.myform.form.patchValue({
+    //   userData: {        
+    //     password: "mypassword"
+    //   },
+    //   name: 'some name',
+    //   email: "sam@sam.com"
+    // });
+  }
+
+  clearForm() {
+    this.myform.reset();
+  }
+
   onSubmit(form: NgForm) {
     console.log(form);
+
+    this.user.userName = this.myform.value.userData.userName;
+    this.user.password = this.myform.value.userData.password;
+    this.user.name = this.myform.value.name;
+    this.user.email = this.myform.value.email;
+
+    console.log(this.user);
   }
 
   forbiddenNameValidator(nameRe: RegExp): ValidatorFn {

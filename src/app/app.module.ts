@@ -29,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { CanDeactivateGuard } from "app/canDeactivate-guard.service";
 import { ErorPageComponent } from './eror-page/eror-page.component';
 import { FormComponent } from './form/form.component';
+import { FormReactiveComponent } from './form-reactive/form-reactive.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FormComponent } from './form/form.component';
     SigninComponent,
     HomeComponent,
     ErorPageComponent,
-    FormComponent
+    FormComponent,
+    FormReactiveComponent
   ],
   imports: [
     BrowserModule,

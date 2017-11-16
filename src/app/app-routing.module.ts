@@ -12,6 +12,7 @@ import { HomeComponent } from "app/home/home.component";
 import { CanDeactivateGuard } from "app/canDeactivate-guard.service";
 import { ErorPageComponent } from "app/eror-page/eror-page.component";
 import { FormComponent } from "app/form/form.component";
+import { FormReactiveComponent } from "app/form-reactive/form-reactive.component";
 
 const appRoutes: Routes = [
 
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'testForm', component: FormComponent },
+    { path: 'testFormReactive', component: FormReactiveComponent },
     { path: 'not-found', component: ErorPageComponent, data: { message: 'Page not found!' } },
     { path: '**', redirectTo: "/not-found" }
 ];
